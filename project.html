@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            padding:20px;
+            background-color: rgb(240, 202, 240);
+        }
+
+        /* NAVBAR - Mobile First */
+        nav{
+            display:flex;
+            flex-direction:column;
+            background:#222;
+            padding:15px;
+        }
+
+        nav a{
+            color:rgb(247, 249, 249);
+            text-decoration:none;
+            padding:10px;
+        }
+
+        /* Desktop Navbar */
+        @media(min-width:768px){
+            nav{
+                flex-direction:row;
+                gap:30px;
+                justify-content:center;
+            }
+        }
+
+        h1{
+            text-align:center;
+            margin:20px 0;
+        }
+
+        /* Image */
+        img{
+            width:100%;
+            max-width:400px;
+            display:block;
+            margin:auto;
+            border-radius:50px; /* 20px if roll no is odd */
+        }
+
+        /* Video */
+        .video-container{
+            background:rgb(150, 106, 154);
+            width:fit-content ;
+            display: block;
+            /* Green/Purple according to roll no */
+            padding:20px;
+
+
+            margin:20px auto;
+            text-align:center;
+        }
+
+        video{
+            width: 300vw;
+            max-width:600px;
+        }
+
+        /* Table */
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin:20px 0;
+        }
+
+        th, td{
+            border:1px solid black;
+            padding:10px;
+            text-align:center;
+        }
+
+        th{
+            background:#ddd;
+        }
+
+        /* Button */
+        .btn{
+            background:rgb(125, 144, 175);
+            color:rgb(147, 163, 195);
+            border:none;
+            padding:12px 25px;
+            margin:20px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            opacity:0.8;
+            transform:scale(1.05);
+        }
+
+        /* Grid - Desktop First */
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:10px;
+            margin-top:20px;
+        }
+
+        .box{
+            background:#ddd;
+            padding:40px;
+            text-align:center;
+            font-size:24px;
+        }
+
+        /* Mobile Grid */
+        @media(max-width:767px){
+            .grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- H1 -->
+    <h1>Welcome to My Website</h1>
+
+    <!-- Image -->
+    <img src="https://picsum.photos/600/400" alt="Sample Image">
+
+    <!-- Video -->
+    <div class="video-container">
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Table -->
+    <table>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+        </tr>
+        <tr>
+            <td> RISHYA</td>
+            <td> NITHI </td>
+            <td> IZUKU</td>
+        </tr>
+        <tr>
+            <td> III YEAR</td>
+            <td>III YEAR</td>
+            <td> III YEAR</td>
+        </tr>
+        <tr>
+            <td> ECE</td>
+            <td> CSE</td>
+            <td> AIML</td>
+        </tr>
+    </table>
+
+    <!-- Button -->
+    <button onClick="alert('Clicked')">Click Me</button>
+
+    <!-- Grid -->
+    <div class="grid">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+    </div>
+
+</body>
+</html>
