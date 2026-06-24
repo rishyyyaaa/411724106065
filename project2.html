@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Fetch Project</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #d28cba;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1{
+            display:flex;
+            justify-content:center;
+            background-color: rgb(201, 129, 201);
+            color: #aec6ca;
+            border-radius: 20px;
+        }
+
+        button{
+            background: #9f28a9;
+            color: rgb(17, 7, 7);
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background: #0056b3;
+        }
+
+        #status{
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(176, 214, 164);
+        }
+
+        .card{
+            background: rgb(114, 52, 86);
+            margin: 15px auto;
+            width: 70%;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 8px grey;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fetch Users Data</h1>
+
+    <button onclick="fetchUsers()">Get Users</button>
+
+    <p id="status"></p>
+
+    <div id="users"></div>
+
+    <script>
+        function fetchUsers() {
+
+            document.getElementById("status").innerText = "Loading...";
+
+            setTimeout(() => {
+
+                fetch("https://jsonplaceholder.typicode.com/users")
+                .then(response => response.json())
+                .then(data => {
+
+                    let output = "";
+
+                    data.forEach(user => {
+                        output += `
+                            <div class="card">
+                                <h3>${user.name}</h3>
+                                <p><strong>Email:</strong> ${user.email}</p>
+                                <p><strong>Phone:</strong> ${user.phone}</p>
+                            </div>
+                        `;
+                    });
+
+                    document.getElementById("users").innerHTML = output;
+
+                    document.getElementById("status").innerText =
+                    "Loaded Successfully";
+                })
+                .catch(error => {
+                    document.getElementById("status").innerText =
+                    "Error Loading Data";
+                    console.log(error);
+                });
+
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
