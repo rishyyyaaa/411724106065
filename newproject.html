@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Manager</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        text-align:center;
+        margin-top:40px;
+        background-color: #d4e2cb;
+        overflow: auto;
+    }
+
+    input{
+        padding:10px;
+        width:250px;
+        text-align: center;
+        border-color: #7CA7C7;
+        
+    }
+    input:hover{
+        background-color: #E8D3B7;
+    }
+
+    button{
+        padding:10px 15px;
+        margin:5px;
+        cursor:pointer;
+    }
+    button:hover{
+        background-color:#E8D3B7;
+    }
+
+    #messageContainer{
+        margin-top:20px;
+        background:gray;
+        margin:40px auto;
+        padding:10px;
+    }
+
+    .message{
+        background:#d2bddc;
+        padding:10px;
+        margin:8px auto;
+        width:300px;
+        border-radius:5px;
+    }
+
+    #status{
+        margin-top:15px;
+        font-weight:bold;
+    }
+
+    #count{
+        margin-top:10px;
+    }
+    h1{
+        font-style: italic;
+        font-weight: bold;
+        background-color: black;
+        color: white;
+        border-radius: 30px;
+        justify-content: center;
+        .buttons{
+    margin-top: 15px;
+}
+
+.buttons button{
+    margin: 5px;
+}
+
+        
+    
+    }
+</style>
+</head>
+<body>
+
+<h1>Message Manager</h1>
+
+
+<input type="text" id="messageInput" placeholder="Enter message">
+<div class = "buttons">
+<button id="addBtn">Add Message</button>
+<button id="clearBtn">Clear All Messages</button>
+</div>
+
+<p id="count">Character Count: 0</p>
+
+<div id="messageContainer"></div>
+
+<p id="status"></p>
+
+<script>
+
+let messages = [];
+
+const input = document.getElementById("messageInput");
+const addBtn = document.getElementById("addBtn");
+const clearBtn = document.getElementById("clearBtn");
+const container = document.getElementById("messageContainer");
+const status = document.getElementById("status");
+const count = document.getElementById("count");
+
+
+// INPUT EVENT LISTENER
+input.addEventListener("input", () => {
+    count.textContent = "Character Count: " + input.value.length;
+});
+
+
+// DISPLAY ALL MESSAGES
+function displayMessages() {
+
+    container.innerHTML = "";
+
+    messages.forEach((msg) => {
+
+        const div = document.createElement("div");
+        div.className = "message";
+        div.textContent = msg;
+
+        container.appendChild(div);
+
+        // REMOVE AFTER 10 SECONDS
+        setTimeout(() => {
+
+            div.remove();
+
+            const index = messages.indexOf(msg);
+
+            if(index > -1){
+                messages.splice(index,1);
+            }
+
+            status.textContent = "Message Expired";
+
+        },10000);
+
+    });
+}
+
+
+// ADD BUTTON
+addBtn.addEventListener("click", () => {
+
+    const message = input.value.trim();
+
+    const promise = new Promise((resolve,reject)=>{
+
+        if(message.length >= 3){
+            resolve(message);
+        }
+        else{
+            reject("Message must contain at least 3 characters");
+        }
+
+    });
+
+    promise
+    .then((msg)=>{
+
+        status.textContent = "Message Added Successfully";
+
+        messages.push(msg);
+
+        displayMessages();
+
+        input.value = "";
+        count.textContent = "Character Count: 0";
+
+    })
+    .catch((error)=>{
+        status.textContent = error;
+    });
+
+});
+
+
+// CLEAR ALL BUTTON
+clearBtn.addEventListener("click", () => {
+
+    messages = [];
+
+    container.innerHTML = "";
+
+    status.textContent = "All Messages Cleared";
+
+});
+
+</script>
+
+</body>
+</html>
